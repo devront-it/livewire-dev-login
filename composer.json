@@ -1,0 +1,20 @@
+{
+    "name": "devront/dev-login",
+    "description": "Livewire component for quick login during local development",
+    "require": {
+        "livewire/livewire": "dev-master"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Devront\\DevLogin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "David",
+            "email": "david.massanek@devront.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
