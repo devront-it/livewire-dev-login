@@ -18,7 +18,7 @@ class DevLogin extends Component
         $data = $userModel::all()->map(function (Model|DevLoginInterface $user) use ($implements) {
             return [
                 'label' => $implements
-                    ? $user->getLabel()
+                    ? $user->getDevLoginLabel()
                     : $user->email,
                 'key' => $user->getKey()
             ];
@@ -26,8 +26,15 @@ class DevLogin extends Component
 
         return view('dev-login::dev-login', [
             'data' => $data,
-            'currentUser' => $implements ? auth()->user()?->getLabel() : auth()->user()?->email
+            'currentUser' => $implements ? auth()->user()?->getDevLoginLabel() : auth()->user()?->email
         ]);
+    }
+
+    private function getRedirectUrl()
+    {
+        $model = (new $userModel) instanceof DevLoginInterface
+            ? $model->getRedirectUrlAfterDevLogin()
+            : '/';
     }
 
     public function login($user_id)
@@ -36,7 +43,7 @@ class DevLogin extends Component
 
         if (config('auth.providers.users.model')::find($user_id)) Auth::loginUsingId($user_id);
 
-        return redirect()->to('/');
+        return redirect()->to($this->getRedirectUrl());
     }
 
     public function logout()
@@ -45,6 +52,6 @@ class DevLogin extends Component
 
         Auth::logout();
 
-        return redirect()->to('/');
+        return redirect()->to($this->getRedirectUrl());
     }
 }
