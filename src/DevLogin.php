@@ -25,7 +25,8 @@ class DevLogin extends Component
         });
 
         return view('dev-login::dev-login', [
-            'data' => $data
+            'data' => $data,
+            'currentUser' => $implements ? auth()->user()?->getLabel() : auth()->user()?->email
         ]);
     }
 
@@ -34,6 +35,15 @@ class DevLogin extends Component
         if (!app()->environment('local')) return;
 
         if (config('auth.providers.users.model')::find($user_id)) Auth::loginUsingId($user_id);
+
+        return redirect()->to('/');
+    }
+
+    public function logout()
+    {
+        if (!app()->environment('local')) return;
+
+        Auth::logout();
 
         return redirect()->to('/');
     }

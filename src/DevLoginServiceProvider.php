@@ -14,7 +14,6 @@ class DevLoginServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Livewire::component('dev-login', DevLogin::class);
-
+        Livewire::component('dev-login::dev-login', DevLogin::class);
     }
 }
