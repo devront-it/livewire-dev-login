@@ -32,7 +32,7 @@ class DevLogin extends Component
 
     private function getRedirectUrl()
     {
-        $model = (new (config('auth.providers.users.model'))) instanceof DevLoginInterface
+        return ($model = (new (config('auth.providers.users.model'))) instanceof DevLoginInterface)
             ? $model->getRedirectUrlAfterDevLogin()
             : '/';
     }
