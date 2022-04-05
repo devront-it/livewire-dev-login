@@ -24,7 +24,7 @@ class DevLogin extends Component
             ];
         });
 
-        return view('dev-login::dev-login', [
+        return view(config('livewire-dev-login.view'), [
             'data' => $data,
             'currentUser' => $implements ? auth()->user()?->getDevLoginLabel() : auth()->user()?->email
         ]);
