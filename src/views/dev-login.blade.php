@@ -20,7 +20,7 @@
                 <div class="dropdown-menu dropdownmenu-info" style="">
                     @forelse($data as $user)
                         <a role="button"
-                           wire:click="login({{$user['key']}})"
+                           wire:click="login('{{$user['key']}}')"
                            class="dropdown-item text-nowrap">
                             @if(auth()->user()?->getKey() === $user['key'])
                                 <svg xmlns="http://www.w3.org/2000/svg"
